@@ -13,7 +13,11 @@ def store_in_database(number):
 
 @app.route('/')
 def index():
-    input_number = int(request.args.get('number'))
+    try:
+        input_number = int(request.args.get('number'))
+    except Exception, e:
+        return jsonify(**{'message': 'Error'})
+
     jalisco_number = calculate_jalisco_number(input_number)
     if jalisco_number > input_number:
         message_text = 'Yo gano con el %s' % jalisco_number

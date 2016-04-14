@@ -11,9 +11,18 @@ class JaliscoFuncionalTestCase(unittest.TestCase):
     def tearDown(self):
         pass
 
+
     def testJaliscoAlwaysWinsIfInputCorrectNumber(self):
         input_number = 1
         expected = 'Yo gano con el 2'
+        response = self.app.get('/?number=%s' % input_number)
+
+        response_message = json.loads(response.data)['message']
+        self.assertEquals(expected, response_message)
+
+    def testJaliscoShoudReturnErrorWithLetter(self):
+        input_number = 'a'
+        expected = 'Error'
         response = self.app.get('/?number=%s' % input_number)
 
         response_message = json.loads(response.data)['message']
