@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript">
+        jQuery('document').ready(
+            function(){
+                jQuery.get({
+                    url: 'http://127.0.0.1:5000/v1/cursos',
+                    success: function(data){
+                        var cursos_cont = jQuery("#cursos-container");
+                        for (var i = 0; i < data.length; i++) {
+                            cursos_cont.append("<li>"+data[i].name+"</li>");
+                        }
+                    }
+                });
+            }
+        );
+
+    </script>
+</head>
+<body>
+    <ul id="cursos-container"></ul>
+</body>
+</html>
